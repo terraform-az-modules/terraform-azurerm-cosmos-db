@@ -137,7 +137,7 @@ resource "azurerm_cosmosdb_cassandra_table" "example" {
 ## Network Contributor role on delegated subnet for Cassandra managed instance
 ##-----------------------------------------------------------------------------
 resource "azurerm_role_assignment" "cassandra_subnet_network_contributor" {
-  count                = var.enabled && var.cassandra_enable ? 1 : 0
+  count                = var.enabled && var.cassandra_enable && var.enable_cassandra_core ? 1 : 0
   scope                = var.delegated_management_subnet_id
   role_definition_name = "Network Contributor"
   principal_id         = var.role_principal_id

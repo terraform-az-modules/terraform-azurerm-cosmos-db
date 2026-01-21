@@ -104,6 +104,10 @@ resource "azurerm_cosmosdb_account" "db" {
 
 
   tags = module.labels.tags
+
+  depends_on = [
+    time_sleep.wait_for_rbac
+  ]
 }
 
 ##----------------------------------------------------------------------------- 
@@ -163,6 +167,16 @@ resource "azurerm_monitor_diagnostic_setting" "cosmosdb_law" {
   lifecycle {
     ignore_changes = [metric, enabled_log]
   }
+}
+
+##-----------------------------------------------------------------------------
+## Timer: Wait for RBAC propagation before creating Cosmos DB
+##----------------------------------------------------------------------------- 
+resource "time_sleep" "wait_for_rbac" {
+  create_duration = "60s" # Waits 60 seconds for permissions to sync
+
+  # This ensures the timer starts ONLY after the role is assigned
+  depends_on = [azurerm_role_assignment.identity_assigned]
 }
 
 ##----------------------------------------------------------------------------- 
