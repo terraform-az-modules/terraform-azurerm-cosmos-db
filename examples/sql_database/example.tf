@@ -24,7 +24,7 @@ module "resource_group" {
   name        = "test"
   environment = "stage"
   label_order = ["environment", "name", "location"]
-  location    = "canadacentral"
+  location    = "eastus"
 }
 
 ##-----------------------------------------------------------------------------
@@ -127,7 +127,7 @@ module "CosmosDB" {
   resource_group_name               = module.resource_group.resource_group_name
   name                              = "core"
   environment                       = "qa"
-  location                          = "eastus"
+  location                          = module.resource_group.resource_group_location
   virtual_network_id                = module.vnet.vnet_id
   role_principal_id                 = data.azuread_service_principal.example.object_id
   private_endpoint_subnet_id        = module.subnet.subnet_ids.subnet1

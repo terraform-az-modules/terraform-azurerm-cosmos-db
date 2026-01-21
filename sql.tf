@@ -18,21 +18,21 @@ resource "azurerm_cosmosdb_sql_container" "example" {
     }
   }
   dynamic "indexing_policy" {
-    for_each = length(var.indexing_policy_settings) > 0 ? [1] : []
+    for_each = length(var.sql_indexing_policy_settings) > 0 ? [1] : []
     content {
-      indexing_mode = var.indexing_policy_settings.sql_indexing_mode != null ? var.indexing_policy_settings.sql_indexing_mode : null
+      indexing_mode = var.sql_indexing_policy_settings.sql_indexing_mode != null ? var.sql_indexing_policy_settings.sql_indexing_mode : null
 
       dynamic "included_path" {
-        for_each = var.indexing_policy_settings.sql_included_path != null ? [1] : []
+        for_each = var.sql_indexing_policy_settings.sql_included_path != null ? [1] : []
         content {
-          path = var.indexing_policy_settings.sql_included_path
+          path = var.sql_indexing_policy_settings.sql_included_path
         }
       }
 
       dynamic "excluded_path" {
-        for_each = var.indexing_policy_settings.sql_excluded_path != null ? [1] : []
+        for_each = var.sql_indexing_policy_settings.sql_excluded_path != null ? [1] : []
         content {
-          path = var.indexing_policy_settings.sql_excluded_path
+          path = var.sql_indexing_policy_settings.sql_excluded_path
         }
       }
     }

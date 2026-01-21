@@ -76,6 +76,7 @@ variable "extra_tags" {
   type        = map(string)
   default     = null
   description = "Variable to pass extra tags."
+  sensitive   = true
 }
 
 ##-----------------------------------------------------------------------------
@@ -170,41 +171,11 @@ variable "is_virtual_network_filter_enabled" {
   description = "Enables virtual network filtering for this Cosmos DB account."
 }
 
-# variable "multiple_write_locations_enabled" {
-#   type        = bool
-#   default     = false
-#   description = "Enable multiple write locations for this Cosmos DB account."
-# }
-
-# variable "access_key_metadata_writes_enabled" {
-#   type        = bool
-#   default     = true
-#   description = "Is write operations on metadata resources (databases, containers, throughput) via account keys enabled?"
-# }
-
-# variable "mongo_server_version" {
-#   type        = string
-#   default     = "4.2"
-#   description = "The Server Version of a MongoDB account."
-# }
-
 variable "network_acl_bypass_for_azure_services" {
   type        = bool
   default     = false
   description = "If Azure services can bypass ACLs."
 }
-
-# variable "network_acl_bypass_ids" {
-#   type        = list(string)
-#   default     = []
-#   description = "The list of resource Ids for Network ACL Bypass for this Cosmos DB account."
-# }
-
-# variable "local_authentication_disabled" {
-#   type        = bool
-#   default     = false
-#   description = "Disable local authentication and ensure only MSI and AAD can be used exclusively for authentication."
-# }
 
 variable "identity" {
   type        = any
@@ -212,23 +183,11 @@ variable "identity" {
   description = "An identity block as defined below."
 }
 
-# variable "restore" {
-#   type        = any
-#   default     = {}
-#   description = "A restore block as defined below."
-# }
-
 variable "minimal_tls_version" {
   type        = string
   default     = "Tls12"
   description = "The minimum TLS version that clients must use to connect to the Cosmos DB account."
 }
-
-# variable "create_mode" {
-#   type        = string
-#   default     = null
-#   description = "The mode to create the Cosmos DB account. Possible values are 'Default' or 'Restore'."
-# }
 
 variable "consistency_level" {
   default     = "BoundedStaleness"
@@ -270,6 +229,7 @@ variable "default_admin_password" {
   type        = string
   default     = "abcd1234"
   description = "The default admin password for the Cosmos DB account."
+  sensitive   = true
 }
 
 variable "virtual_network_id" {
@@ -362,30 +322,6 @@ variable "max_throughput" {
   description = "Maximum throughput (RU/s) for the Cosmos DB account."
 }
 
-# variable "schema_columns" {
-#   type = list(object({
-#     name = string
-#     type = string
-#   }))
-#   default = [
-#     {
-#       name = "test1"
-#       type = "ascii"
-#     },
-#     {
-#       name = "test2"
-#       type = "int"
-#     }
-#   ]
-#   description = "A list of columns for the schema, each with a name and type."
-# }
-
-# variable "partition_keys" {
-#   type        = list(string)
-#   default     = []
-#   description = "A list of partition keys for the schema."
-# }
-
 
 variable "default_ttl" {
   default     = 1
@@ -412,12 +348,6 @@ variable "allowed_headers" {
   description = "A list of headers that are allowed to be part of the cross-origin request."
 }
 
-# variable "allowed_methods" {
-#   type        = list(string)
-#   default     = ["GET", "POST", "OPTIONS"]
-#   description = "A list of HTTP methods that are allowed to be executed by the origin. Valid options are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT, or PATCH."
-# }
-
 variable "allowed_origins" {
   type        = list(string)
   default     = ["*"]
@@ -430,23 +360,11 @@ variable "exposed_headers" {
   description = "A list of response headers that are exposed to CORS clients."
 }
 
-# variable "ignore_missing_vnet_service_endpoint" {
-#   type        = bool
-#   default     = false
-#   description = "If true, adds the subnet as a virtual network rule even if the CosmosDB service endpoint is inactive. Defaults to false."
-# }
-
 variable "backup_type" {
   type        = string
   default     = "Periodic"
   description = "The type of the backup. Possible values are 'Continuous' and 'Periodic'. Migration from Periodic to Continuous is one-way."
 }
-
-# variable "backup_tier" {
-#   type        = string
-#   default     = null
-#   description = "The continuous backup tier. Possible values are 'Continuous7Days' and 'Continuous30Days'."
-# }
 
 variable "interval_in_minutes" {
   type        = number
@@ -465,30 +383,6 @@ variable "storage_redundancy" {
   default     = null
   description = "The type of backup residency. Possible values are 'Geo', 'Local', and 'Zone'. Defaults to 'Geo'."
 }
-
-# variable "default_ttl_in_sec" {
-#   type        = number
-#   default     = -1
-#   description = "Default time to live in seconds for items in the collection. Use -1 for infinite TTL and 0 to disable TTL."
-# }
-
-# variable "index" {
-#   type = object({
-#     keys   = list(string)
-#     unique = bool
-#   })
-#   default = {
-#     keys   = ["_id"]
-#     unique = false
-#   }
-#   description = "The index block for Cosmos DB Mongo Collection."
-# }
-
-# variable "shard_key" {
-#   default     = "unique_key"
-#   type        = string
-#   description = "The shard key for the Cosmos DB Mongo Collection."
-# }
 
 variable "role_name" {
   default     = "test123"
@@ -526,12 +420,14 @@ variable "password" {
   default     = "cricket2001#"
   type        = string
   description = "The password for the Cosmos DB Mongo collection."
+  sensitive   = true
 }
 
 variable "administrator_login_password" {
   type        = string
   default     = "H@Sh1CoR3!"
   description = "The password for the administrator login."
+  sensitive   = true
 }
 
 variable "coordinator_storage_quota_in_mb" {
@@ -573,16 +469,6 @@ variable "point_in_time_in_utc" {
   default     = "2024-11-05T00:00:00Z"
   description = "The date and time in UTC (ISO8601 format) for the Azure Cosmos DB for PostgreSQL cluster restore. Changing this forces a new resource to be created."
 }
-
-# variable "node_storage_quota_in_mb" {
-#   type        = number
-#   default     = 1048576
-#   description = "The storage quota in MB on each worker node. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, and 16777216."
-#   validation {
-#     condition     = contains([32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, 16777216, 13107, 32768], var.node_storage_quota_in_mb)
-#     error_message = "The storage quota must be one of the allowed values: 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4194304, 8388608, or 16777216."
-#   }
-# }
 
 variable "node_storage_quota_in_mb" {
   type        = number
@@ -641,46 +527,14 @@ variable "maintenance_window" {
   description = "The maintenance window for Azure Cosmos DB for PostgreSQL cluster."
 }
 
-variable "coordinator_value" {
-  type        = string
-  default     = "on"
-  description = "The coordinator configuration settings for PostgreSQL cluster."
-}
-
 variable "ip_ranges" {
   type = list(object({
     start_ip_address = string
     end_ip_address   = string
   }))
-  default = [
-    {
-      start_ip_address = "10.0.17.62"
-      end_ip_address   = "10.0.17.64"
-    }
-  ]
+  default     = []
   description = "List of IP ranges (start and end) for firewall rules"
 }
-
-# variable "index_policy" {
-#   type = object({
-#     indexing_mode  = string
-#     included_paths = list(object({ path = string }))
-#     excluded_paths = list(object({
-#       path = string
-#     }))
-#   })
-#   default = {
-#     indexing_mode = "consistent"
-#     included_paths = [
-#       { path = "/*" },
-#       { path = "/included/?" }
-#     ]
-#     excluded_paths = [
-#       { path = "/excluded/?" }
-#     ]
-#   }
-#   description = "Indexing policy configuration for the Cosmos DB collection."
-# }
 
 variable "unique_key" {
   type = object({
@@ -745,12 +599,16 @@ variable "postgres_replica_enable" {
   description = "Enable it when you want to replicate your Main Postgres SQL"
 }
 
-# variable "virtual_network_rule" {
-#   type = list(object({
-#     id                                   = string
-#     ignore_missing_vnet_service_endpoint = bool
-#   }))
-# }
+variable "postgresql_node_configurations" {
+  description = "A map of PostgreSQL node configurations (key = configuration name, value = configuration value)."
+  type        = map(string)
+  default     = {}
+  # Example input: 
+  # {
+  #   "array_nulls"     = "on"
+  #   "backslash_quote" = "on"
+  # }
+}
 
 variable "source_resource_id" {
   type        = string
@@ -767,25 +625,31 @@ variable "gremlin_enable" {
 variable "postgresql_enable" {
   type        = bool
   default     = false
-  description = "Enable Gremlin DataBase By Defaullt its True"
+  description = "Enable PostgreSQL DataBase By Defaullt its True"
 }
 
 variable "cassandra_enable" {
   type        = bool
   default     = false
-  description = "Enable Gremlin DataBase By Defaullt its True"
+  description = "Enable Cassandra DataBase By Defaullt its True"
+}
+
+variable "enable_cassandra_core" {
+  type        = bool
+  default     = false
+  description = "Enable Cassandra Core functionality"
 }
 
 variable "mongodb_enable" {
   type        = bool
   default     = false
-  description = "Enable Gremlin DataBase By Defaullt its True"
+  description = "Enable MongoDB DataBase By Defaullt its True"
 }
 
 variable "enable_sql_database" {
   type        = bool
   default     = false
-  description = "Enable Gremlin DataBase By Defaullt its True"
+  description = "Enable SQL Database By Defaullt its True"
 }
 
 variable "sql_partition_key_paths" {
@@ -821,12 +685,6 @@ variable "index_policy_settings" {
   description = "Indexing policy settings for the database"
 }
 
-# variable "unique_key_paths" {
-#   type        = list(string)
-#   default     = ["/definition/id1", "/definition/id2"]
-#   description = "List of paths for unique keys in Cosmos DB"
-# }
-
 variable "conflict_resolution_mode" {
   type        = string
   default     = "LastWriterWins"
@@ -845,7 +703,7 @@ variable "conflict_resolution_procedure" {
   description = "Procedure to resolve conflicts for Custom mode"
 }
 
-variable "indexing_policy_settings" {
+variable "sql_indexing_policy_settings" {
   type = object({
     sql_indexing_mode = string
     sql_included_path = string
@@ -858,45 +716,6 @@ variable "indexing_policy_settings" {
   }
   description = "Indexing policy settings for Cosmos DB"
 }
-
-# variable "cassandra_schema_settings" {
-#   type = object({
-#     column = map(object({
-#       column_key_name = string
-#       column_key_type = string
-#     }))
-#     partition_key = map(object({
-#       partition_key_name = string
-#     }))
-#     cluster_key = optional(map(object({
-#       cluster_key_name     = string
-#       cluster_key_order_by = string
-#     })))
-#   })
-#   default = {
-#     column = {
-#       columnone = {
-#         column_key_name = "loadid"
-#         column_key_type = "uuid"
-#       }
-#       columntwo = {
-#         column_key_name = "machine"
-#         column_key_type = "uuid"
-#       }
-#       columnthree = {
-#         column_key_name = "mtime"
-#         column_key_type = "int"
-#       }
-#     }
-#     partition_key = {
-#       partition_key_one = {
-#         partition_key_name = "loadid"
-#       }
-#     }
-#     cluster_key = null
-#   }
-#   description = "Schema settings for the Cassandra table"
-# }
 
 variable "cassandra_schema_settings" {
   type = object({
@@ -927,39 +746,6 @@ variable "cassandra_schema_settings" {
 
   description = "Schema settings for the Cassandra table."
 }
-
-# variable "mongo_indexes" {
-#   type = list(object({
-#     mongo_index_keys   = list(string)
-#     mongo_index_unique = optional(bool)
-#   }))
-#   default = [
-#     {
-#       mongo_index_keys   = ["_id"]
-#       mongo_index_unique = true
-#     },
-#     {
-#       mongo_index_keys   = ["unique_key", "name"]
-#       mongo_index_unique = true
-#     },
-#     {
-#       mongo_index_keys   = ["age"]
-#       mongo_index_unique = false
-#     }
-#   ]
-#   description = "List of MongoDB index definitions."
-# }
-
-# variable "virtual_network_rules" {
-#   type = list(object({
-#     id                                   = string
-#     ignore_missing_vnet_service_endpoint = optional(bool)
-#   }))
-#   default     = null
-#   description = "Configures the virtual network subnets allowed to access this Cosmos DB account"
-# }
-
-#-------------------
 
 variable "mongo_server_version" {
   type        = string
@@ -1004,29 +790,11 @@ variable "enable_cors" {
   description = "Enable CORS configuration"
 }
 
-# variable "allowed_origins" {
-#   type        = list(string)
-#   default     = []
-#   description = "List of allowed origins for CORS"
-# }
-
-# variable "allowed_headers" {
-#   type        = list(string)
-#   default     = ["*"]
-#   description = "List of allowed headers for CORS"
-# }
-
 variable "allowed_methods" {
   type        = list(string)
   default     = ["GET", "HEAD", "POST", "PUT", "DELETE", "PATCH"]
   description = "List of allowed HTTP methods for CORS"
 }
-
-# variable "exposed_headers" {
-#   type        = list(string)
-#   default     = []
-#   description = "List of exposed headers for CORS"
-# }
 
 ##-----------------------------------------------------------------------------
 ## Private Endpoint Variables
@@ -1111,15 +879,6 @@ variable "enable_mongo_user" {
 }
 
 ##-----------------------------------------------------------------------------
-## Identity
-##-----------------------------------------------------------------------------
-# variable "identity_type" {
-#   description = "Specifies the type of Managed Service Identity that should be configured on this Storage Account. Possible values are `SystemAssigned`, `UserAssigned`, `SystemAssigned, UserAssigned` (to enable both)."
-#   type        = string
-#   default     = "SystemAssigned"
-# }
-
-##-----------------------------------------------------------------------------
 ## Key Vault & CMK
 ##-----------------------------------------------------------------------------
 variable "cmk_encryption_enabled" {
@@ -1156,24 +915,6 @@ variable "key_opts" {
   default     = ["encrypt", "decrypt", "wrapKey", "unwrapKey", "sign", "verify"]
   description = "A list of key operations that the key supports. Possible values are `encrypt`, `decrypt`, `wrapKey`, `unwrapKey`, `sign`, `verify`, `get`, `list`, `create`, `update`, `import`, `delete`, `recover`, and `backup`."
 }
-
-# variable "key_permissions" {
-#   type        = list(string)
-#   default     = ["Create", "Delete", "Get", "Purge", "Recover", "Update", "Get", "WrapKey", "UnwrapKey", "List", "Decrypt", "Sign", "Encrypt"]
-#   description = "A list of key permissions to be applied for the key vault access policy. Possible values are `get`, `list`, `update`, `create`, `import`, `delete`, `recover`, `backup`, `restore`, `decrypt`, `encrypt`, `wrapKey`, `unwrapKey`, `sign`, and `verify`."
-# }
-
-# variable "secret_permissions" {
-#   type        = list(string)
-#   default     = ["Get", "List", "Set", "Delete", "Recover", "Backup", "Restore", "Purge"]
-#   description = "A list of secret permissions to be applied for the key vault access policy. Possible values are `get`, `list`, `set`, `delete`, `recover`, `backup`, `restore`, and `purge`."
-# }
-
-# variable "storage_permissions" {
-#   type        = list(string)
-#   default     = ["Get", "List"]
-#   description = "A list of storage permissions to be applied for the key vault access policy. Possible values are `get`, `list`, `delete`, `set`, `update`, `regeneratekey`, `setsas`, and `listsas`."
-# }
 
 variable "admin_objects_ids" {
   description = "IDs of the objects that can do all operations on all keys, secrets and certificates."

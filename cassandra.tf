@@ -2,7 +2,7 @@
 ## Cosmos DB Cassandra Cluster resource for managing Cassandra clusters
 ##-----------------------------------------------------------------------------
 resource "azurerm_cosmosdb_cassandra_cluster" "example" {
-  count                          = var.enabled && var.cassandra_enable ? 1 : 0
+  count                          = var.enabled && var.cassandra_enable && var.enable_cassandra_core ? 1 : 0
   name                           = format("%saccs", module.labels.id)
   resource_group_name            = var.resource_group_name
   location                       = var.location
@@ -36,7 +36,7 @@ resource "azurerm_cosmosdb_cassandra_cluster" "example" {
 ##-----------------------------------------------------------------------------
 resource "azurerm_cosmosdb_cassandra_datacenter" "example" {
   depends_on                     = [azurerm_cosmosdb_cassandra_cluster.example]
-  count                          = var.enabled && var.cassandra_enable ? 1 : 0
+  count                          = var.enabled && var.cassandra_enable && var.enable_cassandra_core ? 1 : 0
   name                           = format("%saccd", module.labels.id)
   location                       = var.location
   cassandra_cluster_id           = azurerm_cosmosdb_cassandra_cluster.example[0].id

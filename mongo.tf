@@ -81,7 +81,7 @@ resource "azurerm_cosmosdb_mongo_collection" "main" {
   }
 
   lifecycle {
-    ignore_changes = [throughput, index] # ADD THIS
+    ignore_changes = [throughput]
   }
 }
 

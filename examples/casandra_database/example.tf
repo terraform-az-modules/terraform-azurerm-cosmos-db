@@ -2,8 +2,11 @@ provider "azurerm" {
   features {}
 }
 
-
 data "azurerm_client_config" "current" {}
+data "azuread_service_principal" "cosmosdb" {
+  display_name = "Azure Cosmos DB"
+}
+
 
 locals {
   name        = "app"
@@ -129,7 +132,7 @@ module "CosmosDB" {
   name                           = "test"
   environment                    = "prod"
   virtual_network_id             = module.vnet.vnet_id
-  role_principal_id              = data.azurerm_client_config.current.object_id
+  role_principal_id              = data.azuread_service_principal.cosmosdb.object_id
   delegated_management_subnet_id = module.subnet.subnet_ids.subnet2
   user_object_id                 = data.azurerm_client_config.current.object_id
   cassandra_enable               = true

@@ -139,10 +139,24 @@ module "CosmosDB" {
     #   failover_priority = 1
     # }
   ]
+  postgresql_node_configurations = {
+    array_nulls = "on"
+  }
   diagnostic_settings_enabled   = true
   log_analytics_workspace_id    = module.log-analytics.workspace_id
   enable_private_endpoint_pgsql = true
   private_endpoint_subnet_id    = module.subnet.subnet_ids.subnet1
   private_dns_zone_ids          = module.private-dns-zone.private_dns_zone_ids["cosmos_db_postgresql"]
+
+  # ip_ranges = [
+  #   {
+  #     start_ip_address = "10.0.1.0"
+  #     end_ip_address   = "10.0.1.255"
+  #   },
+  #   {
+  #     start_ip_address = "52.1.0.0"
+  #     end_ip_address   = "52.1.0.50"
+  #   }
+  # ]
 }
 

@@ -84,11 +84,19 @@ resource "azurerm_cosmosdb_postgresql_cluster" "replica_cluster" {
 ## Cosmos DB PostgreSQL Firewall Rule resource for managing firewall rules for PostgreSQL clusters
 ##-----------------------------------------------------------------------------
 resource "azurerm_cosmosdb_postgresql_firewall_rule" "example" {
-  count            = var.enabled && var.postgresql_enable ? 1 : 0
-  name             = format("%sacpfr", module.labels.id)
-  cluster_id       = azurerm_cosmosdb_postgresql_cluster.example[0].id
-  start_ip_address = var.ip_ranges[0].start_ip_address
-  end_ip_address   = var.ip_ranges[0].end_ip_address
+  # 1. Transform the list into a map. Use Start IP as the key to ensure uniqueness.
+  #    Logic: If enabled, loop. If not, return empty map {}.
+  for_each = var.enabled && var.postgresql_enable ? { for r in var.ip_ranges : r.start_ip_address => r } : {}
+
+  # 2. Generate a unique name for each rule. 
+  #    We replace dots in the IP (10.0.0.1) with dashes (10-0-0-1) to make it Azure-compliant.
+  name = format("%s-acpfr-%s", module.labels.id, replace(each.key, ".", "-"))
+
+  cluster_id = azurerm_cosmosdb_postgresql_cluster.example[0].id
+
+  # 3. Access values dynamically using 'each.value'
+  start_ip_address = each.value.start_ip_address
+  end_ip_address   = each.value.end_ip_address
 
   dynamic "timeouts" {
     for_each = var.timeouts
@@ -106,10 +114,11 @@ resource "azurerm_cosmosdb_postgresql_firewall_rule" "example" {
 ## Cosmos DB PostgreSQL Node Configuration resource for managing configuration of PostgreSQL nodes
 ##-----------------------------------------------------------------------------
 resource "azurerm_cosmosdb_postgresql_node_configuration" "example" {
-  count      = var.enabled && var.postgresql_enable ? 1 : 0
-  name       = "array_nulls"
+  for_each = var.enabled && var.postgresql_enable ? var.postgresql_node_configurations : {}
+
+  name       = each.key   # The configuration name (e.g., "array_nulls")
+  value      = each.value # The configuration value (e.g., "on")
   cluster_id = azurerm_cosmosdb_postgresql_cluster.example[0].id
-  value      = var.coordinator_value
 
   dynamic "timeouts" {
     for_each = var.timeouts

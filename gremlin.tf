@@ -55,7 +55,7 @@ resource "azurerm_cosmosdb_gremlin_graph" "example" {
 
 
   dynamic "index_policy" {
-    for_each = var.index_policy_settings != null && length(var.index_policy_settings) > 0 ? [1] : []
+    for_each = var.index_policy_settings != null ? [1] : []
     content {
       automatic      = var.index_policy_settings.indexing_automatic
       indexing_mode  = var.index_policy_settings.indexing_mode
