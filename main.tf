@@ -33,6 +33,8 @@ resource "azurerm_cosmosdb_account" "db" {
   burst_capacity_enabled                = var.burst_capacity_enabled
   public_network_access_enabled         = var.public_network_access_enabled
   network_acl_bypass_for_azure_services = var.network_acl_bypass_for_azure_services
+  local_authentication_disabled         = var.local_authentication_disabled
+  access_key_metadata_writes_enabled    = var.access_key_metadata_writes_enabled
 
   # MongoDB-specific setting
   mongo_server_version = var.kind == "MongoDB" ? var.mongo_server_version : null

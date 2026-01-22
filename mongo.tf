@@ -86,23 +86,17 @@ resource "azurerm_cosmosdb_mongo_collection" "main" {
 }
 
 ##----------------------------------------------------------------------------- 
-## Cosmos DB Mongo Role Definition resource for managing MongoDB role definitions
+## Cosmos DB Mongo Role Definition
+## Refactored to support roles on ALL databases, not just the primary one.
 ##-----------------------------------------------------------------------------
 resource "azurerm_cosmosdb_mongo_role_definition" "example" {
-  count                    = var.enabled && var.mongodb_enable && var.role_name != null && local.mongo_primary_db_name != null ? 1 : 0
-  cosmos_mongo_database_id = azurerm_cosmosdb_mongo_database.mongo_db[local.mongo_primary_db_name].id
-  role_name                = var.role_name
+  # Logic: Iterate over all mongo databases if enabled.
+  # We use the database name as the key.
+  for_each = var.enabled && var.mongodb_enable && var.role_name != null ? { for db in var.mongodb_databases : db.name => db } : {}
 
-  dynamic "timeouts" {
-    for_each = var.timeouts
-    iterator = item
-    content {
-      create = item.value.create
-      read   = item.value.read
-      update = item.value.update
-      delete = item.value.delete
-    }
-  }
+  # Link to the specific database ID dynamically
+  cosmos_mongo_database_id = azurerm_cosmosdb_mongo_database.mongo_db[each.key].id
+  role_name                = var.role_name
 
   dynamic "privilege" {
     for_each = var.privileges
@@ -113,6 +107,17 @@ resource "azurerm_cosmosdb_mongo_role_definition" "example" {
         collection_name = privilege.value.resource.collection_name
         db_name         = privilege.value.resource.db_name
       }
+    }
+  }
+
+  dynamic "timeouts" {
+    for_each = var.timeouts
+    iterator = item
+    content {
+      create = item.value.create
+      read   = item.value.read
+      update = item.value.update
+      delete = item.value.delete
     }
   }
 }
