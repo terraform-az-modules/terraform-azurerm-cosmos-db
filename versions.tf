@@ -4,10 +4,19 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "# Terraform version"
+      version = ">= 4.0"
     }
-  }
-  provider_meta "azurerm" {
-    module_name = "terraform-az-modules/terraform-azurerm-cosmos-db"
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = ">= 3.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = ">= 3.6"
+    }
+    time = {
+      source  = "hashicorp/time"
+      version = ">= 0.9.1"
+    }
   }
 }
