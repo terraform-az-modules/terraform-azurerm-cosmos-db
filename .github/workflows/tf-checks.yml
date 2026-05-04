@@ -6,10 +6,35 @@ on:
 
 jobs:
 # Update 'Job name' and 'working_directory' as needed based on the module structure.
-  complete-example:
+  basic-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
       working_directory: './examples/complete/'
+      provider: none
+  casandra-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
+    with:
+      working_directory: './examples/cadandra_database/'
+      provider: none
+  gremlin-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
+    with:
+      working_directory: './examples/gremlin_database/'
+      provider: none
+  mongo-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
+    with:
+      working_directory: './examples/mongo_database/'
+      provider: none
+  postgressql-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
+    with:
+      working_directory: './examples/postgressql_database/'
+      provider: none
+  sql-example:
+    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
+    with:
+      working_directory: './examples/sql_database/'
       provider: none
 
 # Seperate Job for TFlint workflow call
