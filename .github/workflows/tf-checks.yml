@@ -9,12 +9,12 @@ jobs:
   basic-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
-      working_directory: './examples/complete/'
+      working_directory: './examples/basic/'
       provider: none
   casandra-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
-      working_directory: './examples/cadandra_database/'
+      working_directory: './examples/casandra_database/'
       provider: none
   gremlin-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
