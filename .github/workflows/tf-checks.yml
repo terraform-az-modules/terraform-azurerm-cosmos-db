@@ -29,7 +29,7 @@ jobs:
   postgressql-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
     with:
-      working_directory: './examples/postgressql_database/'
+      working_directory: './examples/postgresql_database/'
       provider: none
   sql-example:
     uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
