@@ -33,7 +33,7 @@ resource "azurerm_cosmosdb_account" "db" {
   burst_capacity_enabled                = var.burst_capacity_enabled
   public_network_access_enabled         = var.public_network_access_enabled
   network_acl_bypass_for_azure_services = var.network_acl_bypass_for_azure_services
-  local_authentication_disabled         = var.local_authentication_disabled
+  local_authentication_enabled          = var.local_authentication_enabled
   access_key_metadata_writes_enabled    = var.access_key_metadata_writes_enabled
 
   # MongoDB-specific setting
@@ -167,7 +167,7 @@ resource "azurerm_monitor_diagnostic_setting" "cosmosdb_law" {
   }
 
   lifecycle {
-    ignore_changes = [metric, enabled_log]
+    ignore_changes = [enabled_metric,enabled_log]
   }
 }
 

@@ -322,10 +322,10 @@ variable "max_throughput" {
   description = "Maximum throughput (RU/s) for the Cosmos DB account."
 }
 
-variable "local_authentication_disabled" {
+variable "local_authentication_enabled" {
   type        = bool
   default     = false
-  description = "Whether local authentication is disabled for the Cosmos DB account."
+  description = "Whether local authentication is enabled for the Cosmos DB account."
 }
 
 variable "access_key_metadata_writes_enabled" {

@@ -7,32 +7,32 @@ on:
 jobs:
 # Update 'Job name' and 'working_directory' as needed based on the module structure.
   basic-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
+    uses: clouddrove/github-shared-workflows/.github/workflows/smurf-tf-checks.yml@v2
     with:
       working_directory: './examples/basic/'
       provider: none
   casandra-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
+    uses: clouddrove/github-shared-workflows/.github/workflows/smurf-tf-checks.yml@v2
     with:
       working_directory: './examples/casandra_database/'
       provider: none
   gremlin-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
+    uses: clouddrove/github-shared-workflows/.github/workflows/smurf-tf-checks.yml@v2
     with:
       working_directory: './examples/gremlin_database/'
       provider: none
   mongo-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
+    uses: clouddrove/github-shared-workflows/.github/workflows/smurf-tf-checks.yml@v2
     with:
       working_directory: './examples/mongo_database/'
       provider: none
   postgressql-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
+    uses: clouddrove/github-shared-workflows/.github/workflows/smurf-tf-checks.yml@v2
     with:
       working_directory: './examples/postgresql_database/'
       provider: none
   sql-example:
-    uses: clouddrove/github-shared-workflows/.github/workflows/stf-checks.yml@v2
+    uses: clouddrove/github-shared-workflows/.github/workflows/smurf-tf-checks.yml@v2
     with:
       working_directory: './examples/sql_database/'
       provider: none
