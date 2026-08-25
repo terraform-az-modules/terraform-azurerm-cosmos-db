@@ -69,7 +69,7 @@
 | key\_vault\_rbac\_auth\_enabled | Specifies whether Role-Based Access Control (RBAC) is enabled for the Key Vault. | `bool` | `true` | no |
 | kind | The kind of Cosmos DB account to create. Possible values are GlobalDocumentDB, MongoDB, Parse, Gremlin, Cassandra, and Table. | `string` | `"GlobalDocumentDB"` | no |
 | label\_order | The order of labels used to construct resource names or tags. If not specified, defaults to ['name', 'environment', 'location']. | `list(string)` | <pre>[<br>  "name",<br>  "environment",<br>  "location"<br>]</pre> | no |
-| local\_authentication\_disabled | Whether local authentication is disabled for the Cosmos DB account. | `bool` | `false` | no |
+| local\_authentication\_enabled | Whether local authentication is enabled for the Cosmos DB account. | `bool` | `false` | no |
 | local\_authentication\_method | The authentication method for local users, e.g., 'None', 'Password', or 'Active Directory'. | `string` | `"None"` | no |
 | location | The location/region where the virtual network is created. Changing this forces a new resource to be created. | `string` | `null` | no |
 | log\_analytics\_workspace\_id | The ID of the Log Analytics Workspace to send diagnostics to. | `string` | `null` | no |
