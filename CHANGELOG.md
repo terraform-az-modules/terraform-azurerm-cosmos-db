@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.0.1] - 2026-08-25
+### :bug: Bug Fixes
+- [`2d63df9`](https://github.com/terraform-az-modules/terraform-azurerm-cosmos-db/commit/2d63df915e99d56c3135f9d742bb4f6b1321bc25) - fixed the version.tf
+- [`72a03bc`](https://github.com/terraform-az-modules/terraform-azurerm-cosmos-db/commit/72a03bc650549b1816e33e1761e1b1ca5e9c4416) - updated skip checks to avoid security scan failure *(commit by [@rmalvia-cd](https://github.com/rmalvia-cd))*
+- [`07f7734`](https://github.com/terraform-az-modules/terraform-azurerm-cosmos-db/commit/07f7734086aa5d668cec9d836495b3672094a562) - updated tf-checks workflow *(commit by [@rmalvia-cd](https://github.com/rmalvia-cd))*
+- [`e253fa7`](https://github.com/terraform-az-modules/terraform-azurerm-cosmos-db/commit/e253fa7d66b55ee2f6592d7a387672810ac06452) - updated tf-checks workflow *(commit by [@rmalvia-cd](https://github.com/rmalvia-cd))*
+- [`d687120`](https://github.com/terraform-az-modules/terraform-azurerm-cosmos-db/commit/d68712049d2c2fc37ed98a3b818fabcbe1571420) - updated tf check and added support for azurerm 5.0 *(commit by [@karan-cd](https://github.com/karan-cd))*
+
+### :wrench: Chores
+- [`6d7af44`](https://github.com/terraform-az-modules/terraform-azurerm-cosmos-db/commit/6d7af44a6f6000b6d28bf22bfad8aaa31cb430ed) - **deps**: bump actions/checkout from 6 to 7 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+
+
 ## [v2.0.0] - 2026-04-13
 ### :bug: Bug Fixes
 - [`caefead`](https://github.com/terraform-az-modules/terraform-azurerm-cosmos-db/commit/caefead93e403ece506301dbfc0821b2c62806a7) - Added major changes for cosmosdb module and apis for it *(commit by [@maharshi-cd](https://github.com/maharshi-cd))*
@@ -36,3 +48,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Set provider: none in tf-checks for validate-only CI
 - Bump required_version to >= 1.10.0
 [v2.0.0]: https://github.com/terraform-az-modules/terraform-azurerm-cosmos-db/compare/v1.0.0...v2.0.0
+[v2.0.1]: https://github.com/terraform-az-modules/terraform-azurerm-cosmos-db/compare/v2.0.0...v2.0.1
